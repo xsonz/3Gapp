@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,6 +23,8 @@ public class ActivityMain extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final EditText CustomCode = (EditText) findViewById(R.id.et_code);
 
 
         IntentFilter intentFilter = new IntentFilter("SmsMessage.intent.MAIN");
@@ -39,10 +42,10 @@ public class ActivityMain extends Activity {
                 // Add it to the list or do whatever you wish to
                 Log.e("onResume", "" + msg + body + pNumber);
 
-              //  Toast.makeText(getApplicationContext(), body, Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getApplicationContext(), body, Toast.LENGTH_SHORT).show();
 
                 // check body content with your validation code
-                if (body.equalsIgnoreCase("12345")) {
+                if (body.equalsIgnoreCase(CustomCode.getText().toString())) {
 
                     Toast.makeText(getApplicationContext(),
                             "3G is On", Toast.LENGTH_SHORT).show();
@@ -91,4 +94,10 @@ public class ActivityMain extends Activity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        this.unregisterReceiver(this.mIntentReceiver);
+    }
 }
