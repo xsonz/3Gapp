@@ -5,10 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.lang.reflect.InvocationTargetException;
@@ -24,7 +28,9 @@ public class ActivityMain extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final EditText CustomCode = (EditText) findViewById(R.id.et_code);
+        SharedPreferences getCode = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+         final String customCode = getCode.getString("code", "12345");
+
 
 
         IntentFilter intentFilter = new IntentFilter("SmsMessage.intent.MAIN");
@@ -45,7 +51,7 @@ public class ActivityMain extends Activity {
                 //  Toast.makeText(getApplicationContext(), body, Toast.LENGTH_SHORT).show();
 
                 // check body content with your validation code
-                if (body.equalsIgnoreCase(CustomCode.getText().toString())) {
+                if (body.equalsIgnoreCase(customCode)) {
 
                     Toast.makeText(getApplicationContext(),
                             "3G is On", Toast.LENGTH_SHORT).show();
@@ -94,10 +100,26 @@ public class ActivityMain extends Activity {
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
 
-        this.unregisterReceiver(this.mIntentReceiver);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+
+            case R.id.action_settings:
+                    Intent OpenSettings = new Intent(this, Prefs.class);
+                startActivity(OpenSettings);
+                break;
+        }
+
+        return false;
     }
 }

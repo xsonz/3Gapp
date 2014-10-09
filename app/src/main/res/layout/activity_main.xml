@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="1. Install the app and open it just once."
+        android:text="1. Install the app and open it once."
         android:id="@+id/textView2"
         android:layout_marginTop="45dp"
         android:layout_below="@+id/textView"
@@ -33,21 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="2. Set custom code to turn on Mobile Data (3G)"
+        android:text="2. Set a custom code in Settings to turn on Mobile Data (3G)"
         android:id="@+id/textView3"
         android:layout_marginTop="34dp"
         android:layout_below="@+id/textView2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/et_code"
-        android:hint="@string/et_hint"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
