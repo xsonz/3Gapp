@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:title="Enter Custom Code"
+        android:key="code"
+        android:summary="This is the code you will send to yourself."
+        android:inputType="number"
+        android:hint="i.e. 3G" />
+
+</PreferenceScreen>
